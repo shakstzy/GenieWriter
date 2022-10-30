@@ -1,0 +1,79 @@
+from multiprocessing.connection import wait
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+import time
+from selenium.webdriver.common.keys import Keys
+from datamuse import datamuse
+from Phyme import Phyme
+ph = Phyme()
+
+artist = input('What artist would you like to imitate?')
+options = webdriver.ChromeOptions()
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
+# driver = webdriver.Chrome()
+# driver = webdriver.Chrome('./chromedriver.exe')
+s = Service('/Users/adithkum/Downloads/GenieWriter/chromedriver')
+driver = webdriver.Chrome(service=s, options=options)
+driver.get("https://www.musixmatch.com/search/"+ artist + "/artists")
+incre = 0
+# lyrics = driver.find_element(By.CLASS_NAME, "artists grid")
+# lyrics = driver.find_element(By.XPATH, "//ul[contains(@class, 'artists') and contains(@class, 'grid')]/li[0]/div/div[1]")
+artist = driver.find_element(By.XPATH, "//ul[contains(@class, 'artists') and contains(@class, 'grid')]/li[1]/div/div[2]/div/h2/a")
+# print(lyrics)
+artist.click()
+driver.refresh()
+while incre < 3:
+    if len(driver.find_elements(By.XPATH, "//a[contains(@class, 'page-load-more')]")) != 0:
+        len(driver.find_elements(By.XPATH, "//a[contains(@class, 'page-load-more')]"))
+        incre = 0
+    driver.execute_script("window.scrollTo(0,100)")
+    incre +=1
+# print(driver.find_elements(By.XPATH, "//li[contains(@class, 'showPosition') and contains(@class, 'showCoverart')]"))
+tracksList = driver.find_elements(By.XPATH, "//li[contains(@class, 'showPosition') and contains(@class, 'showCoverart')]")
+storageLinksArray = []
+for webel in tracksList:
+    myLink = webel.find_element(By.XPATH, ".//a[contains(@class, 'title')]")
+    storageLinksArray.append(myLink.get_attribute("href"))
+
+artistStorage = ""
+
+for link in storageLinksArray:
+    driver.get(link)
+    driver.refresh()
+    lyricsContent = driver.find_elements(By.XPATH, "//span[contains(@class, 'lyrics__content__ok')]")
+    for webel in lyricsContent:
+        artistStorage += webel.text
+
+artistList = artistStorage.split('\n')
+
+api = datamuse.Datamuse()
+rhymeWord = input('What word would you like lines for?')
+orange_near_rhymes = ph.get_family_rhymes(rhymeWord)
+# orange_near_rhymes = api.words(rel_nry=rhymeWord, max=50)
+# print(orange_near_rhymes)
+returnString = set()
+
+for line in artistList:
+    lis = list(line.split(" "))
+    length = len(lis)
+    lastWord = lis[length-1]
+    for word in orange_near_rhymes.get(1):
+        if lastWord == word or lastWord == rhymeWord:
+            returnString.add(line)
+print(returnString)
+
+# api = datamuse.Datamuse()
+# rhymeWord = input('What word would you like lines for?')
+# orange_near_rhymes = api.words(rel_rhy=rhymeWord, max=5)
+# print(orange_near_rhymes)
+
+
+
+# //*[@id="search-artists"]/div/div[2]/div/ul
+# print(driver.title)
+# lyrics = driver.find_element(By.CLASS_NAME, "Lyrics__Container-sc-1ynbvzw-6 YYrds")
+# lyrics = driver.find_element(By.XPATH, "")
+# login_form = driver.find_element_by_xpath("//*[@id="lyrics-root"]/div[1]")
+# print lyrics
+# driver.close()

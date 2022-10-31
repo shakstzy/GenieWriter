@@ -1,4 +1,17 @@
+import requests
+artist = input('What artist would you like to imitate?')
+url = "https://api.musixmatch.com/ws/1.1/artist.search?format=json&q_artist=" + artist + "&apikey=928e7168219f3356f5186e940cbf58fa"
 
+
+# url = "https://api.musixmatch.com/ws/1.1/artist.get?format=json&artist_id=51614128&apikey=928e7168219f3356f5186e940cbf58fa"
+
+payload={}
+headers = {}
+response = requests.request("GET", url, headers=headers, data=payload)
+response = response.json()
+print(response['message'])
+# print(response.body.artist_list.artist[0].artist_id)
+# print(response.body.artist_list.artist[0].artist_id)
 
 
 

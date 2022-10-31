@@ -1,6 +1,7 @@
 import requests
+APIKEYS = ['99980988201f634058717251a5723ce1', '928e7168219f3356f5186e940cbf58fa']
 artist = input('What artist would you like to imitate?')
-url = "https://api.musixmatch.com/ws/1.1/artist.search?format=json&q_artist=" + artist + "&apikey=928e7168219f3356f5186e940cbf58fa"
+url = "https://api.musixmatch.com/ws/1.1/artist.search?format=json&q_artist=" + artist + "&apikey=" + APIKEYS[1]
 
 
 # url = "https://api.musixmatch.com/ws/1.1/artist.get?format=json&artist_id=51614128&apikey=928e7168219f3356f5186e940cbf58fa"

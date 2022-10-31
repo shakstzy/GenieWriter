@@ -3,8 +3,23 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from Phyme import Phyme
+ph = Phyme()
+
+def cleanUp(var):
+    returnArr = []
+    for item in var.values():
+        returnArr.extend(item)
+    return returnArr
+
 APIKEYS = ['99980988201f634058717251a5723ce1', '928e7168219f3356f5186e940cbf58fa']
 artist = input('What artist would you like to imitate?')
+rhymeWord = input('What word would you like lines for?')
+returnString = set()
+# rhymeTemp = [cleanUp(ph.get_family_rhymes(rhymeWord)), cleanUp(ph.get_perfect_rhymes(rhymeWord)), cleanUp(ph.get_partner_rhymes(rhymeWord)), cleanUp(ph.get_additive_rhymes(rhymeWord)), cleanUp(ph.get_subtractive_rhymes(rhymeWord)), cleanUp(ph.get_substitution_rhymes(rhymeWord)), cleanUp(ph.get_assonance_rhymes(rhymeWord)), cleanUp(ph.get_consonant_rhymes(rhymeWord))]
+rhymeTemp = [cleanUp(ph.get_perfect_rhymes(rhymeWord))]
+flattened = [val for sublist in rhymeTemp for val in sublist]
+cleaned_lst = [rhyme.split("(")[0] for rhyme in flattened]
 url = "https://api.musixmatch.com/ws/1.1/artist.search?format=json&q_artist=" + artist + "&apikey=" + APIKEYS[1]
 options = webdriver.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -41,7 +56,16 @@ for link in track_urls:
         artistStorage += webel.text
 
 artistList = artistStorage.split('\n')
-print(artistList)
+# print(artistList)
+
+for line in artistList:
+    lis = list(line.split(" "))
+    length = len(lis)
+    lastWord = lis[length-1]
+    for word in flattened:
+        if lastWord == word or lastWord == rhymeWord:
+            returnString.add(line)
+print(returnString)
 
 # print(track_urls)
 

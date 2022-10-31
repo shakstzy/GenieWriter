@@ -1,15 +1,7 @@
 import requests
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 APIKEYS = ['99980988201f634058717251a5723ce1', '928e7168219f3356f5186e940cbf58fa']
 artist = input('What artist would you like to imitate?')
 url = "https://api.musixmatch.com/ws/1.1/artist.search?format=json&q_artist=" + artist + "&apikey=" + APIKEYS[1]
-options = webdriver.ChromeOptions()
-options.add_experimental_option('excludeSwitches', ['enable-logging'])
-s = Service('/Users/adithkum/Downloads/GenieWriter/chromedriver')
-driver = webdriver.Chrome(service=s, options=options)
 
 payload={}
 headers = {}
@@ -28,22 +20,9 @@ def get_track_urls(tracks):
 
 track_urls = get_track_urls(track_search)
 
-# for url in track_urls:
-#     driver.get(url)
 
-artistStorage = ""
 
-for link in track_urls:
-    driver.get(link)
-    driver.refresh()
-    lyricsContent = driver.find_elements(By.XPATH, "//span[contains(@class, 'lyrics__content__ok')]")
-    for webel in lyricsContent:
-        artistStorage += webel.text
-
-artistList = artistStorage.split('\n')
-print(artistList)
-
-# print(track_urls)
+print(track_urls)
 
 # lyrics_list = []
 # for id in track_ids:

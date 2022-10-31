@@ -9,7 +9,7 @@ payload={}
 headers = {}
 response = requests.request("GET", url, headers=headers, data=payload)
 response = response.json()
-print(response['message'])
+print(response['message']['body']['artist_list'])
 # print(response.body.artist_list.artist[0].artist_id)
 # print(response.body.artist_list.artist[0].artist_id)
 

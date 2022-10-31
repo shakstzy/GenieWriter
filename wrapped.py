@@ -17,7 +17,7 @@ artist = input('What artist would you like to imitate?')
 rhymeWord = input('What word would you like lines for?')
 returnString = set()
 # rhymeTemp = [cleanUp(ph.get_family_rhymes(rhymeWord)), cleanUp(ph.get_perfect_rhymes(rhymeWord)), cleanUp(ph.get_partner_rhymes(rhymeWord)), cleanUp(ph.get_additive_rhymes(rhymeWord)), cleanUp(ph.get_subtractive_rhymes(rhymeWord)), cleanUp(ph.get_substitution_rhymes(rhymeWord)), cleanUp(ph.get_assonance_rhymes(rhymeWord)), cleanUp(ph.get_consonant_rhymes(rhymeWord))]
-rhymeTemp = [cleanUp(ph.get_perfect_rhymes(rhymeWord))]
+rhymeTemp = [cleanUp(ph.get_perfect_rhymes(rhymeWord)), cleanUp(ph.get_family_rhymes(rhymeWord)), cleanUp(ph.get_additive_rhymes(rhymeWord)), cleanUp(ph.get_subtractive_rhymes(rhymeWord)), cleanUp(ph.get_assonance_rhymes(rhymeWord))]
 flattened = [val for sublist in rhymeTemp for val in sublist]
 cleaned_lst = [rhyme.split("(")[0] for rhyme in flattened]
 url = "https://api.musixmatch.com/ws/1.1/artist.search?format=json&q_artist=" + artist + "&apikey=" + APIKEYS[1]

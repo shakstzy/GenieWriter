@@ -16,14 +16,9 @@ def cleanUp(var):
 def pullWord():
     return input('What word would you like lines for?')
 
+def getRhymes(rhymeWord):
+    return [rhyme.split("(")[0] for rhyme in [val for sublist in [cleanUp(ph.get_perfect_rhymes(rhymeWord)), cleanUp(ph.get_family_rhymes(rhymeWord)), cleanUp(ph.get_additive_rhymes(rhymeWord)), cleanUp(ph.get_subtractive_rhymes(rhymeWord)), cleanUp(ph.get_assonance_rhymes(rhymeWord))] for val in sublist]]
 
-returnString = set()
-# rhymeTemp = [cleanUp(ph.get_family_rhymes(rhymeWord)), cleanUp(ph.get_perfect_rhymes(rhymeWord)), cleanUp(ph.get_partner_rhymes(rhymeWord)), cleanUp(ph.get_additive_rhymes(rhymeWord)), cleanUp(ph.get_subtractive_rhymes(rhymeWord)), cleanUp(ph.get_substitution_rhymes(rhymeWord)), cleanUp(ph.get_assonance_rhymes(rhymeWord)), cleanUp(ph.get_consonant_rhymes(rhymeWord))]
-rhymeTemp = [cleanUp(ph.get_perfect_rhymes(rhymeWord)), cleanUp(ph.get_family_rhymes(rhymeWord)), cleanUp(ph.get_additive_rhymes(rhymeWord)), cleanUp(ph.get_subtractive_rhymes(rhymeWord)), cleanUp(ph.get_assonance_rhymes(rhymeWord))]
-# flattened = [val for sublist in rhymeTemp for val in sublist]
-# cleaned_lst = [rhyme.split("(")[0] for rhyme in flattened]
-flattened = [val for sublist in rhymeTemp for val in sublist]
-cleaned_lst = [rhyme.split("(")[0] for rhyme in flattened]
 
 rhymeArtist = input('What artist would you like to imitate?')
 
@@ -56,4 +51,6 @@ print(returnString)
 #print(flattened)
 
 def main():
+    returnString = set()
     rhymeWord = pullWord()
+    cleaned_lst = getRhymes(rhymeWord)

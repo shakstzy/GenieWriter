@@ -2,7 +2,7 @@ import pprint
 import lyricsgenius as lg
 import string
 
-from macpath import split
+# from macpath import split
 genius = lg.Genius("5iAKokbxLM9hHsS7LiHILuot9sYecAVaXKvMOIQuhKhdNXIhgQo8m6URTG-cPSkM")
 from Phyme import Phyme
 ph = Phyme()
@@ -49,7 +49,7 @@ def main():
     artistStorage = ""
     rhymeWord = pullWord()
     cleaned_lst = getRhymes(rhymeWord)
-    rhymeArtist = pullArtist
+    rhymeArtist = pullArtist()
     artist = geniusPull(rhymeArtist)
     artistStorageWrite(artist, artistStorage)
     artistList = splitIt(artistStorage)

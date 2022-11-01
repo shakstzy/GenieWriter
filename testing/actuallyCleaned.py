@@ -32,7 +32,7 @@ def splitIt(artistStorage):
     return artistStorage.split('\n')
 
 def geniusPull(rhymeArtist):
-    genius.search_artist(rhymeArtist, max_songs=20, sort="popularity")
+    return genius.search_artist(rhymeArtist, max_songs=20, sort="popularity")
 
 def matching(artistList, cleaned_lst, rhymeWord, returnString):
     for line in artistList:
@@ -48,10 +48,10 @@ def main():
     returnString = set()
     artistStorage = ""
     rhymeWord = pullWord()
-    cleaned_lst = getRhymes(rhymeWord)
     rhymeArtist = pullArtist()
-    artist = geniusPull(rhymeArtist)
-    artistStorageWrite(artist, artistStorage)
+    cleaned_lst = getRhymes(rhymeWord)
+    print(cleaned_lst)
+    artistStorageWrite(geniusPull(rhymeArtist), artistStorage)
     artistList = splitIt(artistStorage)
     matching(artistList, cleaned_lst, rhymeWord, returnString)
     print(returnString)

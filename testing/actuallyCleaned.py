@@ -50,7 +50,6 @@ def main():
     rhymeWord = pullWord()
     rhymeArtist = pullArtist()
     cleaned_lst = getRhymes(rhymeWord)
-    print(cleaned_lst)
     artistStorageWrite(geniusPull(rhymeArtist), artistStorage)
     artistList = splitIt(artistStorage)
     matching(artistList, cleaned_lst, rhymeWord, returnString)

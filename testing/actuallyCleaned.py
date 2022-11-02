@@ -5,7 +5,7 @@ import string
 
 # from macpath import split
 genius = lg.Genius(
-    "5iAKokbxLM9hHsS7LiHILuot9sYecAVaXKvMOIQuhKhdNXIhgQo8m6URTG-cPSkM")
+    "5iAKokbxLM9hHsS7LiHILuot9sYecAVaXKvMOIQuhKhdNXIhgQo8m6URTG-cPSkM", timeout = 10, retries = 3)
 ph = Phyme()
 
 

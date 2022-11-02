@@ -1,25 +1,30 @@
+from Phyme import Phyme
 import pprint
 import lyricsgenius as lg
 import string
-genius = lg.Genius("5iAKokbxLM9hHsS7LiHILuot9sYecAVaXKvMOIQuhKhdNXIhgQo8m6URTG-cPSkM")
-from Phyme import Phyme
+genius = lg.Genius(
+    "5iAKokbxLM9hHsS7LiHILuot9sYecAVaXKvMOIQuhKhdNXIhgQo8m6URTG-cPSkM")
 ph = Phyme()
+
 
 def cleanUp(var):
     returnArr = []
     for item in var.values():
         returnArr.extend(item)
         # returnArr.append(v[1])
-        
+
     return returnArr
+
 
 def pullWord():
     return input('What word would you like lines for?')
 
 
 returnString = set()
+rhymeWord = 'Drake'
 # rhymeTemp = [cleanUp(ph.get_family_rhymes(rhymeWord)), cleanUp(ph.get_perfect_rhymes(rhymeWord)), cleanUp(ph.get_partner_rhymes(rhymeWord)), cleanUp(ph.get_additive_rhymes(rhymeWord)), cleanUp(ph.get_subtractive_rhymes(rhymeWord)), cleanUp(ph.get_substitution_rhymes(rhymeWord)), cleanUp(ph.get_assonance_rhymes(rhymeWord)), cleanUp(ph.get_consonant_rhymes(rhymeWord))]
-rhymeTemp = [cleanUp(ph.get_perfect_rhymes(rhymeWord)), cleanUp(ph.get_family_rhymes(rhymeWord)), cleanUp(ph.get_additive_rhymes(rhymeWord)), cleanUp(ph.get_subtractive_rhymes(rhymeWord)), cleanUp(ph.get_assonance_rhymes(rhymeWord))]
+rhymeTemp = [cleanUp(ph.get_perfect_rhymes(rhymeWord)), cleanUp(ph.get_family_rhymes(rhymeWord)), cleanUp(
+    ph.get_additive_rhymes(rhymeWord)), cleanUp(ph.get_subtractive_rhymes(rhymeWord)), cleanUp(ph.get_assonance_rhymes(rhymeWord))]
 # flattened = [val for sublist in rhymeTemp for val in sublist]
 # cleaned_lst = [rhyme.split("(")[0] for rhyme in flattened]
 flattened = [val for sublist in rhymeTemp for val in sublist]
@@ -53,7 +58,7 @@ print(returnString)
 #     print(rhyme)
 # print(cleaned_lst)
 
-#print(flattened)
+# print(flattened)
 
-def main():
-    rhymeWord = pullWord()
+# def main():
+#     rhymeWord = pullWord()
